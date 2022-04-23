@@ -1,24 +1,48 @@
-import 'package:flutter/foundation.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_moviedb_api/models/move_error.dart';
-import 'package:flutter_moviedb_api/models/movie_model.dart';
+import 'package:flutter_moviedb_api/models/movie_popular_model.dart' as Popular;
+import 'package:flutter_moviedb_api/models/movie_trailer_model.dart' as Trailer;
+import 'package:flutter_moviedb_api/models/movie_trend_model.dart' as Trend;
 import 'package:flutter_moviedb_api/services/api_status.dart';
 import 'package:flutter_moviedb_api/services/movie_service.dart';
+import 'package:flutter_moviedb_api/utils/constants.dart';
+import 'package:flutter_moviedb_api/views/component/loading_widget.dart';
 
 class MainViewModel extends ChangeNotifier {
   bool _loading = false;
   bool _error = false;
-  MovieModel? _movieModel;
-  List<Result> _popularList = [];
+  Popular.MoviePopularModel? _moviePopularModel;
+  Trend.MovieTrendModel? _movieTrendModel;
+  Trailer.MovieTrailerModel? _movieTrailerModel;
+  List<Popular.Result> _popularList = [];
+  List<Trend.Result> _trendList = [];
+  List<Trailer.Result> _trailerList = [];
   MovieError _movieError = MovieError(code: 0, massage: 'massage');
 
   bool get loading => _loading;
   bool get error => _error;
-  MovieModel? get movieModel => _movieModel;
-  List<Result> get popularList => _popularList;
+  Popular.MoviePopularModel? get moviePopularModel => _moviePopularModel;
+  Trend.MovieTrendModel? get movieTrendModel => _movieTrendModel;
+  Trailer.MovieTrailerModel? get movieTrailerModel => _movieTrailerModel;
+  List<Popular.Result> get popularList => _popularList;
+  List<Trend.Result> get trendList => _trendList;
+  List<Trailer.Result> get trailerList => _trailerList;
   MovieError get movieError => _movieError;
 
+  void main() async {
+    await setLoading(true);
+    await getPopular();
+    await getTrend();
+    await getTrailer();
+    await setLoading(false);
+  }
+
   MainViewModel() {
-    getPopular();
+    main();
+    // getPopular();
+    // getTrend();
+    // getTrailer();
   }
 
   setLoading(bool loading) {
@@ -31,20 +55,40 @@ class MainViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  setMovieModel(MovieModel movieModel) {
-    _movieModel = movieModel;
+  setMoviePopularModel(Popular.MoviePopularModel moviePopularModel) {
+    _moviePopularModel = moviePopularModel;
+  }
+
+  setMovieTrendModel(Trend.MovieTrendModel movieTrendModel) {
+    _movieTrendModel = movieTrendModel;
+  }
+
+  setMovieTrailerModel(Trailer.MovieTrailerModel movieTrailerModel) {
+    _movieTrailerModel = movieTrailerModel;
   }
 
   setMovieError(MovieError movieError) {
     _movieError = movieError;
   }
 
-  setPopular(MovieModel movieModel) {
+  setPopular(Popular.MoviePopularModel movieModel) async {
     int resLength = movieModel.results.length;
-    print("resLength is " + resLength.toString());
     for (int i = 0; i < resLength; i++) {
       _popularList.add(movieModel.results[i]);
-      print('adding ' + movieModel.results[i].originalTitle);
+    }
+  }
+
+  setTrend(Trend.MovieTrendModel movieTrendModel) {
+    int resLength = movieTrendModel.results.length;
+    for (int i = 0; i < resLength; i++) {
+      _trendList.add(movieTrendModel.results[i]);
+    }
+  }
+
+  setTrailer(Trailer.MovieTrailerModel movieTrailerModel) {
+    int resLength = movieTrailerModel.results.length;
+    for (int i = 0; i < resLength; i++) {
+      _trailerList.add(movieTrailerModel.results[i]);
     }
   }
 
@@ -52,11 +96,49 @@ class MainViewModel extends ChangeNotifier {
     setLoading(true);
     var response = await MovieService.getPopular();
     if (response is Success) {
-      await setMovieModel(response.response as MovieModel);
+      await setMoviePopularModel(
+          response.response as Popular.MoviePopularModel);
       print('GET MOVIE POPULAR SUCCESS');
-      setPopular(_movieModel!);
+      setPopular(_moviePopularModel!);
     }
     if (response is Failure) {
+      MovieError movieError = MovieError(
+          code: response.code, massage: response.errorResponse.toString());
+      setMovieError(movieError);
+      setError(true);
+    }
+    setLoading(false);
+  }
+
+  getTrend() async {
+    setLoading(true);
+    var response = await MovieService.getTrend();
+    if (response is Success) {
+      await setMovieTrendModel(response.response as Trend.MovieTrendModel);
+      print('GET MOVIE TREND SUCCESS');
+      setTrend(_movieTrendModel!);
+    }
+    if (response is Failure) {
+      print('GET MOVIE TREND Failure');
+      MovieError movieError = MovieError(
+          code: response.code, massage: response.errorResponse.toString());
+      setMovieError(movieError);
+      setError(true);
+    }
+    setLoading(false);
+  }
+
+  getTrailer() async {
+    setLoading(true);
+    var response = await MovieService.getTrailer();
+    if (response is Success) {
+      await setMovieTrailerModel(
+          response.response as Trailer.MovieTrailerModel);
+      print('GET MOVIE TRAILER SUCCESS');
+      setTrailer(movieTrailerModel!);
+    }
+    if (response is Failure) {
+      print('GET MOVIE TRAILER Failure');
       MovieError movieError = MovieError(
           code: response.code, massage: response.errorResponse.toString());
       setMovieError(movieError);

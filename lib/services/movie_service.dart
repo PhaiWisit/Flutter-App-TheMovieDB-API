@@ -1,6 +1,8 @@
 import 'dart:io';
 
-import 'package:flutter_moviedb_api/models/movie_model.dart';
+import 'package:flutter_moviedb_api/models/movie_popular_model.dart' as Popular;
+import 'package:flutter_moviedb_api/models/movie_trend_model.dart' as Trend;
+import 'package:flutter_moviedb_api/models/movie_trailer_model.dart' as Trailer;
 import 'package:flutter_moviedb_api/utils/constants.dart';
 
 import 'api_status.dart';
@@ -13,7 +15,7 @@ class MovieService {
       var response = await http.get(url);
       if (SUCCESS == response.statusCode) {
         return Success(
-            code: SUCCESS, response: movieModelFromJson(response.body));
+            code: SUCCESS, response: Popular.movieModelFromJson(response.body));
       } else {
         return Failure(
             code: USER_INVALID_RESPONSE, errorResponse: 'Invalid Response');
@@ -26,18 +28,51 @@ class MovieService {
     } catch (e) {
       return Failure(code: UNKNOWN_ERROR, errorResponse: 'Unknown Error');
     }
+  }
 
-    // var request = http.Request(
-    //     'GET',
-    //     Uri.parse(
-    //         'https://api.themoviedb.org/3/movie/popular?api_key=6e87fd216de01af5e84bd54deb5c8999&language=en-US&page=1'));
+  static Future<Object> getTrend() async {
+    try {
+      var url = Uri.parse(MOVIE_TREND);
+      var response = await http.get(url);
+      if (SUCCESS == response.statusCode) {
+        return Success(
+            code: SUCCESS,
+            response: Trend.movieTrendModelFromJson(response.body));
+      } else {
+        return Failure(
+            code: USER_INVALID_RESPONSE, errorResponse: 'Invalid Response');
+      }
+    } on SocketException {
+      return Failure(
+          code: NO_INTERNET, errorResponse: 'No Internet Connection');
+    } on FormatException {
+      return Failure(code: INVALID_FORMAT, errorResponse: 'Invalid Format');
+    } catch (e) {
+      print(e);
+      return Failure(code: UNKNOWN_ERROR, errorResponse: e);
+    }
+  }
 
-    // http.StreamedResponse response = await request.send();
-
-    // if (response.statusCode == 200) {
-    //   print(await response.stream.bytesToString());
-    // } else {
-    //   print(response.reasonPhrase);
-    // }
+  static Future<Object> getTrailer() async {
+    try {
+      var url = Uri.parse(MOVIE_TRAILER);
+      var response = await http.get(url);
+      if (SUCCESS == response.statusCode) {
+        return Success(
+            code: SUCCESS,
+            response: Trailer.movieTrailerModelFromJson(response.body));
+      } else {
+        return Failure(
+            code: USER_INVALID_RESPONSE, errorResponse: 'Invalid Response');
+      }
+    } on SocketException {
+      return Failure(
+          code: NO_INTERNET, errorResponse: 'No Internet Connection');
+    } on FormatException {
+      return Failure(code: INVALID_FORMAT, errorResponse: 'Invalid Format');
+    } catch (e) {
+      print(e);
+      return Failure(code: UNKNOWN_ERROR, errorResponse: e);
+    }
   }
 }

@@ -8,11 +8,19 @@ const String MOVIE_POPULAR =
         MOVIE_API_KEY +
         '&language=en-US&page=1';
 
+const String MOVIE_TREND =
+    'https://api.themoviedb.org/3/trending/all/week?api_key=' + MOVIE_API_KEY;
+
+const String MOVIE_TRAILER =
+    'https://api.themoviedb.org/3/movie/upcoming?api_key=' +
+        MOVIE_API_KEY +
+        '&language=en-US&page=1';
+
 const String VIEW_MOVIE_IMAGE = 'https://image.tmdb.org/t/p/w500/';
 const String VIEW_MOVIE_YOUTUBE = 'https://www.youtube.com/watch?v=';
 
 //Color
-const Color colorBlueDark = Color(0xFF101010);
+const Color colorBackgroundDark = Color(0xFF101010);
 
 //Status
 const SUCCESS = 200;

@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_moviedb_api/view_models/main_view_model.dart';
 import 'package:flutter_moviedb_api/views/home_screen.dart';
@@ -5,6 +6,14 @@ import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
+}
+
+class AppScrollBehavior extends MaterialScrollBehavior {
+  @override
+  Set<PointerDeviceKind> get dragDevices => {
+        PointerDeviceKind.touch,
+        PointerDeviceKind.mouse,
+      };
 }
 
 class MyApp extends StatelessWidget {
@@ -19,6 +28,7 @@ class MyApp extends StatelessWidget {
         // ChangeNotifierProvider(create: (_) => RegisterViewModel()),
       ],
       child: MaterialApp(
+        scrollBehavior: AppScrollBehavior(),
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(

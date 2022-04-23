@@ -18,7 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
   static const TextStyle optionStyle = TextStyle(
     fontSize: 30,
     fontWeight: FontWeight.bold,
-    color: colorBlueDark,
+    color: colorBackgroundDark,
   );
   static const List<Widget> _widgetOptions = <Widget>[
     MainPage(),
@@ -53,33 +53,33 @@ class _HomeScreenState extends State<HomeScreen> {
                     .push(MaterialPageRoute(builder: (_) => SearchPage())),
                 icon: Icon(Icons.search))
           ],
-          backgroundColor: colorBlueDark,
+          backgroundColor: colorBackgroundDark,
           title: const Text(
             'MovieDB API',
             style: TextStyle(color: Colors.white),
           )),
       body: _widgetOptions.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: colorBlueDark,
+        backgroundColor: colorBackgroundDark,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
               icon: Icon(
                 Icons.home,
               ),
               label: 'หน้าหลัก ',
-              backgroundColor: colorBlueDark),
+              backgroundColor: colorBackgroundDark),
           BottomNavigationBarItem(
               icon: Icon(Icons.movie),
               label: 'ภาพยนต์ ',
-              backgroundColor: colorBlueDark),
+              backgroundColor: colorBackgroundDark),
           BottomNavigationBarItem(
               icon: Icon(Icons.live_tv_outlined),
               label: 'ซีรีส์ ',
-              backgroundColor: colorBlueDark),
+              backgroundColor: colorBackgroundDark),
           BottomNavigationBarItem(
               icon: Icon(Icons.favorite),
               label: 'รายการโปรด ',
-              backgroundColor: colorBlueDark),
+              backgroundColor: colorBackgroundDark),
         ],
         unselectedItemColor: Colors.grey,
         // backgroundColor: Colors.black,

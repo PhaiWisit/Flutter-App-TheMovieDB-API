@@ -6,14 +6,13 @@ import 'package:flutter_moviedb_api/views/component/loading_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
-class PopularMain extends StatelessWidget {
-  const PopularMain({Key? key}) : super(key: key);
+class TrendMain extends StatelessWidget {
+  const TrendMain({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     MainViewModel mainViewModel = context.watch<MainViewModel>();
     TextStyle textStyleWhite = TextStyle(color: Colors.white);
-
     return Container(
       height: 240,
       color: colorBackgroundDark,
@@ -29,7 +28,7 @@ class PopularMain extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'ยอดนิยม',
+                    'มาแรงในสัปดาห์นี้',
                     style: TextStyle(color: Colors.white, fontSize: 18),
                   ),
                   Icon(
@@ -53,7 +52,7 @@ class PopularMain extends StatelessWidget {
                 return Expanded(
                   child: ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      itemCount: mainViewModel.popularList.length,
+                      itemCount: mainViewModel.trendList.length,
                       itemBuilder: ((context, index) {
                         return _buileMovieCard(index, mainViewModel);
                       })),
@@ -80,8 +79,8 @@ class PopularMain extends StatelessWidget {
               ),
             ),
             child: CachedNetworkImage(
-              imageUrl: VIEW_MOVIE_IMAGE +
-                  mainViewModel.popularList[index].posterPath,
+              imageUrl:
+                  VIEW_MOVIE_IMAGE + mainViewModel.trendList[index].posterPath,
               imageBuilder: (context, imageProvider) => Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(
