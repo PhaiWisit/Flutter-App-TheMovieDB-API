@@ -72,6 +72,7 @@ class MainViewModel extends ChangeNotifier {
   }
 
   setPopular(Popular.MoviePopularModel movieModel) async {
+    _popularList = [];
     int resLength = movieModel.results.length;
     for (int i = 0; i < resLength; i++) {
       _popularList.add(movieModel.results[i]);
@@ -80,6 +81,7 @@ class MainViewModel extends ChangeNotifier {
 
   setTrend(Trend.MovieTrendModel movieTrendModel) {
     int resLength = movieTrendModel.results.length;
+    _trendList = [];
     for (int i = 0; i < resLength; i++) {
       _trendList.add(movieTrendModel.results[i]);
     }
@@ -87,6 +89,7 @@ class MainViewModel extends ChangeNotifier {
 
   setTrailer(Trailer.MovieTrailerModel movieTrailerModel) {
     int resLength = movieTrailerModel.results.length;
+    _trailerList = [];
     for (int i = 0; i < resLength; i++) {
       _trailerList.add(movieTrailerModel.results[i]);
     }
