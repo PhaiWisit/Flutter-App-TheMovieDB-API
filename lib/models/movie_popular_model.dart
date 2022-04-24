@@ -104,6 +104,7 @@ class Result {
       };
 }
 
+// ignore: constant_identifier_names
 enum OriginalLanguage { EN, KO, FR, SV }
 
 final originalLanguageValues = EnumValues({
@@ -120,9 +121,7 @@ class EnumValues<T> {
   EnumValues(this.map);
 
   Map<T, String> get reverse {
-    if (reverseMap == null) {
-      reverseMap = map.map((k, v) => new MapEntry(v, k));
-    }
+    reverseMap ??= map.map((k, v) => MapEntry(v, k));
     return reverseMap!;
   }
 }

@@ -68,7 +68,7 @@ class TrendMain extends StatelessWidget {
   Widget _buileMovieCard(int index, MainViewModel mainViewModel) {
     return Padding(
       padding: const EdgeInsets.only(left: 8, top: 8, bottom: 8),
-      child: Container(
+      child: SizedBox(
         width: 130,
         child: Stack(children: <Widget>[
           Container(

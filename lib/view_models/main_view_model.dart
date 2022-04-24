@@ -1,6 +1,4 @@
 import 'dart:math';
-
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_moviedb_api/models/move_error.dart';
 import 'package:flutter_moviedb_api/models/movie_popular_model.dart' as Popular;
@@ -8,8 +6,6 @@ import 'package:flutter_moviedb_api/models/movie_trailer_model.dart' as Trailer;
 import 'package:flutter_moviedb_api/models/movie_trend_model.dart' as Trend;
 import 'package:flutter_moviedb_api/services/api_status.dart';
 import 'package:flutter_moviedb_api/services/movie_service.dart';
-import 'package:flutter_moviedb_api/utils/constants.dart';
-import 'package:flutter_moviedb_api/views/component/loading_widget.dart';
 
 class MainViewModel extends ChangeNotifier {
   bool _loading = false;

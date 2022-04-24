@@ -11,7 +11,7 @@ void main() {
     await tester.tap(find.byIcon(Icons.home));
     await tester.pump();
     expect(find.text('home'), findsOneWidget);
-    expect(find.text('movie'), findsNothing);
+    expect(find.text('หน้าหลัก '), findsNothing);
 
     await tester.tap(find.byIcon(Icons.movie));
     await tester.pump();

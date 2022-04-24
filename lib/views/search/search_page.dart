@@ -2,7 +2,6 @@
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_moviedb_api/models/search_model.dart';
 import 'package:flutter_moviedb_api/utils/constants.dart';
 import 'package:flutter_moviedb_api/view_models/search_view_model.dart';
 import 'package:flutter_moviedb_api/views/component/app_loading.dart';
@@ -21,9 +20,7 @@ class _SearchPageState extends State<SearchPage> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
-    // Provider.of<SearchViewModel>(context, listen: false).clearSearchList();
   }
 
   @override
@@ -116,7 +113,7 @@ class _SearchPageState extends State<SearchPage> {
                                       .searchList[index].originalTitle,
                                   style: textStyleWhite,
                                 ),
-                                subtitle: Container(
+                                subtitle: SizedBox(
                                   height: 40,
                                   child: Text(
                                     searchViewModel.searchList[index].overview,
@@ -145,7 +142,7 @@ class _SearchPageState extends State<SearchPage> {
   Widget _buileMovieCard(int index, SearchViewModel searchViewModel) {
     return Padding(
       padding: const EdgeInsets.only(left: 8, top: 8, bottom: 8),
-      child: Container(
+      child: SizedBox(
         width: 130,
         height: 100,
         child: Stack(children: <Widget>[

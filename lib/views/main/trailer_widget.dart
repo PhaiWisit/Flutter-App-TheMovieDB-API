@@ -62,46 +62,43 @@ class _TrailerMainState extends State<TrailerMain> {
           itemBuilder: (context, index) {
             return Padding(
               padding: EdgeInsets.all(8),
-              child: Container(
-                // width: 130,
-                child: Stack(children: <Widget>[
-                  Container(
-                    // width: 130,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10),
-                      ),
+              child: Stack(children: <Widget>[
+                Container(
+                  // width: 130,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(10),
                     ),
-                    child: CachedNetworkImage(
-                      imageUrl: VIEW_MOVIE_IMAGE +
-                          mainViewModel.trailerList[index].backdropPath,
-                      imageBuilder: (context, imageProvider) => Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(10),
-                          ),
-                          image: DecorationImage(
-                              image: imageProvider, fit: BoxFit.cover),
+                  ),
+                  child: CachedNetworkImage(
+                    imageUrl: VIEW_MOVIE_IMAGE +
+                        mainViewModel.trailerList[index].backdropPath,
+                    imageBuilder: (context, imageProvider) => Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10),
                         ),
-                      ),
-                      placeholder: (context, url) => LoadingWidget(
-                        isImage: true,
-                      ),
-                      errorWidget: (context, url, error) => Icon(Icons.error),
-                    ),
-                  ),
-                  Positioned.fill(
-                    child: Material(
-                      color: Colors.transparent,
-                      child: InkWell(
-                        onTap: () {
-                          //
-                        },
+                        image: DecorationImage(
+                            image: imageProvider, fit: BoxFit.cover),
                       ),
                     ),
+                    placeholder: (context, url) => LoadingWidget(
+                      isImage: true,
+                    ),
+                    errorWidget: (context, url, error) => Icon(Icons.error),
                   ),
-                ]),
-              ),
+                ),
+                Positioned.fill(
+                  child: Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      onTap: () {
+                        //
+                      },
+                    ),
+                  ),
+                ),
+              ]),
             );
             // return widget_damo_app[index];
           },

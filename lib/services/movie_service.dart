@@ -1,3 +1,5 @@
+// ignore_for_file: library_prefixes, avoid_print
+
 import 'dart:io';
 
 import 'package:flutter_moviedb_api/models/movie_popular_model.dart' as Popular;

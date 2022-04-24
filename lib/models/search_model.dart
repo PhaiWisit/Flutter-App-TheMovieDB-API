@@ -2,6 +2,8 @@
 //
 //     final searchModel = searchModelFromJson(jsonString);
 
+// ignore_for_file: constant_identifier_names
+
 import 'dart:convert';
 
 SearchModel searchModelFromJson(String str) =>

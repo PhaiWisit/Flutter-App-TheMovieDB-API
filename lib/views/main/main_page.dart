@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_moviedb_api/models/movie_popular_model.dart';
 import 'package:flutter_moviedb_api/utils/constants.dart';
 import 'package:flutter_moviedb_api/view_models/main_view_model.dart';
-import 'package:flutter_moviedb_api/view_models/search_view_model.dart';
 import 'package:flutter_moviedb_api/views/main/popular_widget.dart';
 import 'package:flutter_moviedb_api/views/main/trailer_widget.dart';
 import 'package:flutter_moviedb_api/views/main/trend_widget.dart';

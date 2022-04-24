@@ -2,6 +2,8 @@
 //
 //     final movieTrendModel = movieTrendModelFromJson(jsonString);
 
+// ignore_for_file: constant_identifier_names
+
 import 'dart:convert';
 
 MovieTrendModel movieTrendModelFromJson(String str) =>
@@ -158,7 +160,7 @@ class EnumValues<T> {
 
   Map<T, String> get reverse {
     // if (reverseMap == null) {
-    reverseMap = map.map((k, v) => new MapEntry(v, k));
+    reverseMap = map.map((k, v) => MapEntry(v, k));
     // }
     return reverseMap!;
   }
