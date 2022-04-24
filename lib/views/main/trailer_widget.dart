@@ -36,6 +36,11 @@ class _TrailerMainState extends State<TrailerMain> {
         height: 240,
         color: colorBackgroundDark,
         child: Swiper(
+          autoplay: true,
+          autoplayDelay: 5000,
+          autoplayDisableOnInteraction: true,
+          duration: 1500,
+          curve: Curves.decelerate,
           loop: true,
           index: _currentIndex,
           controller: _swiperController,

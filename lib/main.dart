@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_moviedb_api/utils/web_demo_view.dart';
 import 'package:flutter_moviedb_api/view_models/main_view_model.dart';
 import 'package:flutter_moviedb_api/view_models/search_view_model.dart';
 import 'package:flutter_moviedb_api/views/home_screen.dart';
@@ -29,14 +30,17 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => SearchViewModel())
       ],
       child: MaterialApp(
-        scrollBehavior: AppScrollBehavior(),
-        debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        home: const HomeScreen(),
-      ),
+          scrollBehavior: AppScrollBehavior(),
+          debugShowCheckedModeBanner: false,
+          title: 'Flutter Demo',
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
+          ),
+          home: WebDemoView(
+            child: HomeScreen(),
+          )
+          // home: const HomeScreen(),
+          ),
     );
   }
 }
