@@ -23,14 +23,6 @@ class _TrailerMainState extends State<TrailerMain> {
   Widget build(BuildContext context) {
     MainViewModel mainViewModel = context.watch<MainViewModel>();
     TextStyle textStyleWhite = TextStyle(color: Colors.white);
-
-    // List<dynamic> widget_damo_app = [
-    //   Text('data1'),
-    //   Text('data2'),
-    //   Text('data3'),
-    //   Text('data4'),
-    // ];
-
     if (mainViewModel.loading) {
       return Container(
           color: colorBackgroundDark, height: 240, child: AppLoading());
@@ -43,12 +35,6 @@ class _TrailerMainState extends State<TrailerMain> {
       return Container(
         height: 240,
         color: colorBackgroundDark,
-        // decoration: BoxDecoration(
-        //   image: DecorationImage(
-        //       image: NetworkImage(
-        //           VIEW_MOVIE_IMAGE + mainViewModel.popularList[0].backdropPath),
-        //       fit: BoxFit.fill),
-        // ),
         child: Swiper(
           loop: true,
           index: _currentIndex,
@@ -61,46 +47,8 @@ class _TrailerMainState extends State<TrailerMain> {
           },
           itemBuilder: (context, index) {
             return Padding(
-              padding: EdgeInsets.all(8),
-              child: Stack(children: <Widget>[
-                Container(
-                  // width: 130,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(10),
-                    ),
-                  ),
-                  child: CachedNetworkImage(
-                    imageUrl: VIEW_MOVIE_IMAGE +
-                        mainViewModel.trailerList[index].backdropPath,
-                    imageBuilder: (context, imageProvider) => Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(10),
-                        ),
-                        image: DecorationImage(
-                            image: imageProvider, fit: BoxFit.cover),
-                      ),
-                    ),
-                    placeholder: (context, url) => LoadingWidget(
-                      isImage: true,
-                    ),
-                    errorWidget: (context, url, error) => Icon(Icons.error),
-                  ),
-                ),
-                Positioned.fill(
-                  child: Material(
-                    color: Colors.transparent,
-                    child: InkWell(
-                      onTap: () {
-                        //
-                      },
-                    ),
-                  ),
-                ),
-              ]),
-            );
-            // return widget_damo_app[index];
+                padding: EdgeInsets.all(8),
+                child: _buildSlideShow(index, mainViewModel));
           },
           pagination: SwiperPagination(
             builder: CustomPaginationBuilder(
@@ -112,5 +60,80 @@ class _TrailerMainState extends State<TrailerMain> {
         ),
       );
     }
+  }
+
+  Widget _buildSlideShow(int index, MainViewModel mainViewModel) {
+    return Stack(children: <Widget>[
+      Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(
+            Radius.circular(10),
+          ),
+        ),
+        child: CachedNetworkImage(
+          imageUrl:
+              VIEW_MOVIE_IMAGE + mainViewModel.trailerList[index].backdropPath,
+          imageBuilder: (context, imageProvider) => Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(
+                Radius.circular(10),
+              ),
+              image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
+            ),
+          ),
+          placeholder: (context, url) => LoadingWidget(
+            isImage: true,
+          ),
+          errorWidget: (context, url, error) => Icon(Icons.error),
+        ),
+      ),
+      Align(
+        alignment: Alignment.topRight,
+        child: Container(
+          height: 30,
+          width: 120,
+          decoration: BoxDecoration(
+            color: Color.fromARGB(129, 0, 0, 0),
+            borderRadius: BorderRadius.only(
+              topRight: Radius.circular(10),
+              bottomLeft: Radius.circular(10),
+            ),
+          ),
+          child: Center(
+              child: Text(
+            'Latest Trailers',
+            style: TextStyle(color: Colors.red.shade800),
+          )),
+        ),
+      ),
+      Align(
+        alignment: Alignment.bottomCenter,
+        child: Container(
+          color: Color.fromARGB(129, 0, 0, 0),
+          child: ListTile(
+            title: Text(
+              mainViewModel.trailerList[index].originalTitle,
+              style: TextStyle(color: Colors.white),
+            ),
+            subtitle: Text(
+              mainViewModel.trailerList[index].overview,
+              style: TextStyle(color: Colors.grey),
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+        ),
+      ),
+      Positioned.fill(
+        child: Material(
+          color: Colors.transparent,
+          child: InkWell(
+            onTap: () {
+              //
+            },
+          ),
+        ),
+      ),
+    ]);
   }
 }

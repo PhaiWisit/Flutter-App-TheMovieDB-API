@@ -13,16 +13,6 @@ class MainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     MainViewModel mainViewModel = context.watch<MainViewModel>();
 
-    // List<Image> image_popular ;
-    // int popularLength = mainViewModel.popularList.length;
-
-    // if (!mainViewModel.loading) {
-    //   for (int i = 0; i < popularLength; i++) {
-    //     image_popular.add(Image.network(
-    //         VIEW_MOVIE_IMAGE + mainViewModel.popularList[i].posterPath));
-    //   }
-    // }
-
     if (mainViewModel.error) {
       return Container(
           color: Colors.white,
@@ -37,7 +27,6 @@ class MainPage extends StatelessWidget {
             child: ListView(
               children: [
                 TrailerMain(),
-
                 PopularMain(),
                 TrendMain(),
                 Container(
