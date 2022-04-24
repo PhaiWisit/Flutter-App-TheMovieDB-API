@@ -23,3 +23,12 @@
 - :soon: SettingPage
 - :x: AboutPage
 
+### Screenshort
+<br/>
+
+- MainPage <br/>
+<img src="screenshots/flutter_01.png" width="350">
+<br/><br/>
+
+- SearchPage <br/>
+<img src="screenshots/flutter_02.png" width="350">
