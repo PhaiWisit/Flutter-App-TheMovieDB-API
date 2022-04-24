@@ -6,8 +6,8 @@
 - Replace MOVIE_API_KEY in constants.dart with your API key.
 
 ### Page
-
-- MainPage
+:white_check_mark:
+-  MainPage
 - SearchPage
 - DetailPage
 - VideoViewPage
