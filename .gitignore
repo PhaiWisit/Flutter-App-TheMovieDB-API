@@ -32,8 +32,8 @@ migrate_working_dir/
 .pub/
 
 /lib/utils/api_key.dart
-/build/*
-!/build/web
+/build/
+
 
 
 # Web related
