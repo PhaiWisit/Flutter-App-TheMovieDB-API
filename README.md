@@ -9,17 +9,17 @@
 
 :white_check_mark: : Finish<br/>
 :parking: : Inprogress<br/>
-:pushpin: : Plan<br/>
+:soon: : Plan<br/>
 :x: : Abandon<br/>
 
 - :white_check_mark: MainPage
 - :white_check_mark: SearchPage
 - :parking: DetailPage
-- :pushpin: VideoViewPage
+- :soon: VideoViewPage
 - :x: MoviePage
 - :x: SeriesPage
-- :pushpin: FavoritePage
+- :soon: FavoritePage
 - :x: ProfilePage
-- :pushpin: SettingPage
+- :soon: SettingPage
 - :x: AboutPage
 
