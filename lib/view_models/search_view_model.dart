@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter_moviedb_api/models/move_error.dart';
+import 'package:flutter_moviedb_api/models/movie_error.dart';
 import 'package:flutter_moviedb_api/models/search_model.dart';
 import 'package:flutter_moviedb_api/services/api_status.dart';
 import 'package:flutter_moviedb_api/services/search_service.dart';

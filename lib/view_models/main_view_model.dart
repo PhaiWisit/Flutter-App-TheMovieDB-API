@@ -1,6 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:flutter_moviedb_api/models/move_error.dart';
+import 'package:flutter_moviedb_api/models/movie_error.dart';
 import 'package:flutter_moviedb_api/models/movie_popular_model.dart' as Popular;
 import 'package:flutter_moviedb_api/models/movie_trailer_model.dart' as Trailer;
 import 'package:flutter_moviedb_api/models/movie_trend_model.dart' as Trend;
