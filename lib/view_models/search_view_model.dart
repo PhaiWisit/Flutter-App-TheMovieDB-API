@@ -47,9 +47,8 @@ class SearchViewModel extends ChangeNotifier {
   }
 
   clearSearchList() async {
-    setLoading(true);
     _searchList = [];
-    setLoading(false);
+    notifyListeners();
   }
 
   getSearch(String textSearch) async {

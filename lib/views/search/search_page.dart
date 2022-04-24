@@ -18,107 +18,128 @@ class SearchPage extends StatefulWidget {
 
 class _SearchPageState extends State<SearchPage> {
   var searchController = TextEditingController();
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    // Provider.of<SearchViewModel>(context, listen: false).clearSearchList();
+  }
+
   @override
   Widget build(BuildContext context) {
     SearchViewModel searchViewModel = context.watch<SearchViewModel>();
     var textStyleWhite = TextStyle(color: Colors.white);
 
-    return Scaffold(
-        backgroundColor: colorBackgroundDark,
-        appBar: AppBar(
-            backgroundColor: colorBackgroundDark,
-            title: Container(
-              width: double.infinity,
-              height: 40,
-              decoration: BoxDecoration(
-                  color: Colors.white, borderRadius: BorderRadius.circular(5)),
-              child: Center(
-                child: TextField(
-                  controller: searchController,
-                  textInputAction: TextInputAction.search,
-                  onChanged: (value) {
-                    if (searchController.text.isEmpty) {
-                      searchViewModel.clearSearchList();
-                    }
-                  },
-                  onSubmitted: (value) {
-                    searchViewModel.getSearch(searchController.text);
-                  },
-                  decoration: InputDecoration(
-                      // prefixIcon: Icon(Icons.search),
-                      suffixIcon: IconButton(
-                        icon: Icon(Icons.search),
-                        onPressed: () {
-                          searchViewModel.getSearch(searchController.text);
-                        },
-                      ),
-                      hintText: 'ค้นหา',
-                      border: InputBorder.none),
+    return WillPopScope(
+      onWillPop: () {
+        searchViewModel.clearSearchList();
+        Navigator.pop(context, false);
+        return Future.value(false);
+      },
+      child: Scaffold(
+          backgroundColor: colorBackgroundDark,
+          appBar: AppBar(
+              backgroundColor: colorBackgroundDark,
+              title: Container(
+                width: double.infinity,
+                height: 40,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(5)),
+                child: Center(
+                  child: TextField(
+                    controller: searchController,
+                    textInputAction: TextInputAction.search,
+                    onChanged: (value) {
+                      if (searchController.text.isEmpty) {
+                        searchViewModel.clearSearchList();
+                      }
+                    },
+                    onSubmitted: (value) {
+                      if (searchController.text.isNotEmpty) {
+                        searchViewModel.getSearch(searchController.text);
+                      }
+                    },
+                    decoration: InputDecoration(
+                        // prefixIcon: Icon(Icons.search),
+                        suffixIcon: IconButton(
+                          icon: Icon(Icons.search),
+                          onPressed: () {
+                            if (searchController.text.isNotEmpty) {
+                              searchViewModel.getSearch(searchController.text);
+                            }
+                          },
+                        ),
+                        hintText: 'ค้นหา',
+                        border: InputBorder.none),
+                  ),
                 ),
-              ),
-            )),
-        body: Builder(builder: (context) {
-          if (searchViewModel.loading) {
-            return AppLoading();
-          } else if (searchViewModel.error) {
-            return Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  searchViewModel.movieError.massage,
-                  style: textStyleWhite,
-                ),
-              ],
-            );
-          } else {
-            return Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ListView.builder(
-                itemCount: searchViewModel.searchList.length,
-                itemBuilder: ((context, index) {
-                  if (searchViewModel.searchList[index].backdropPath ==
-                      'null') {
-                    return SizedBox(
-                      height: 0,
-                      // child: Text('null'),
-                    );
-                  } else {
-                    return Container(
-                      padding: EdgeInsets.only(left: 20),
-                      height: 100,
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          _buileMovieCard(index, searchViewModel),
-                          Expanded(
-                            child: ListTile(
-                              title: Text(
-                                searchViewModel.searchList[index].originalTitle,
-                                style: textStyleWhite,
-                              ),
-                              subtitle: Container(
-                                height: 40,
-                                child: Text(
-                                  searchViewModel.searchList[index].overview,
-                                  style: TextStyle(color: Colors.grey),
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 2,
+              )),
+          body: Builder(builder: (context) {
+            if (searchViewModel.loading) {
+              return AppLoading();
+            } else if (searchViewModel.error) {
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    searchViewModel.movieError.massage,
+                    style: textStyleWhite,
+                  ),
+                ],
+              );
+            } else {
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ListView.builder(
+                  itemCount: searchViewModel.searchList.length,
+                  itemBuilder: ((context, index) {
+                    if (searchViewModel.searchList[index].backdropPath ==
+                        'null') {
+                      return SizedBox(
+                        height: 0,
+                        // child: Text('null'),
+                      );
+                    } else {
+                      return Container(
+                        padding: EdgeInsets.only(left: 20),
+                        height: 100,
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            _buileMovieCard(index, searchViewModel),
+                            Expanded(
+                              child: ListTile(
+                                title: Text(
+                                  searchViewModel
+                                      .searchList[index].originalTitle,
+                                  style: textStyleWhite,
+                                ),
+                                subtitle: Container(
+                                  height: 40,
+                                  child: Text(
+                                    searchViewModel.searchList[index].overview,
+                                    style: TextStyle(color: Colors.grey),
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 2,
+                                  ),
                                 ),
                               ),
-                            ),
-                          )
-                        ],
-                      ),
-                    );
-                  }
-                }),
-                // separatorBuilder: (BuildContext context, int index) {
-                //   return Divider();
-                // },
-              ),
-            );
-          }
-        }));
+                            )
+                          ],
+                        ),
+                      );
+                    }
+                  }),
+                  // separatorBuilder: (BuildContext context, int index) {
+                  //   return Divider();
+                  // },
+                ),
+              );
+            }
+          })),
+    );
   }
 
   Widget _buileMovieCard(int index, SearchViewModel searchViewModel) {
