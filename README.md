@@ -7,6 +7,8 @@
 
 ### Page
 
+:white_check_mark: : Finish
+
 - :white_check_mark: MainPage
 - :white_check_mark: SearchPage
 - DetailPage
