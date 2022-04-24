@@ -7,19 +7,19 @@
 
 ### Page
 
-:white_check_mark: : Finish
-:soon: : Inprogress
-:pushpin: : Plan
-:x: : Abandon
-
+:white_check_mark: : Finish<br/>
+:parking: : Inprogress<br/>
+:pushpin: : Plan<br/>
+:x: : Abandon<br/>
 
 - :white_check_mark: MainPage
 - :white_check_mark: SearchPage
-- DetailPage
-- VideoViewPage
-- MoviePage
-- SeriesPage
-- FavoritePage
-- ProfilePage
-- SettingPage
-- AboutPage
+- :parking: DetailPage
+- :pushpin: VideoViewPage
+- :x: MoviePage
+- :x: SeriesPage
+- :pushpin: FavoritePage
+- :x: ProfilePage
+- :pushpin: SettingPage
+- :x: AboutPage
+
