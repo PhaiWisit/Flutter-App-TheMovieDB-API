@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_moviedb_api/models/move_error.dart';
@@ -90,8 +92,9 @@ class MainViewModel extends ChangeNotifier {
   setTrailer(Trailer.MovieTrailerModel movieTrailerModel) {
     int resLength = movieTrailerModel.results.length;
     _trailerList = [];
+    List randomList = shuffle(movieTrailerModel.results);
     for (int i = 0; i < resLength; i++) {
-      _trailerList.add(movieTrailerModel.results[i]);
+      _trailerList.add(randomList[i]);
     }
   }
 
@@ -148,5 +151,18 @@ class MainViewModel extends ChangeNotifier {
       setError(true);
     }
     setLoading(false);
+  }
+
+  List shuffle(List items) {
+    var random = Random();
+
+    for (var i = items.length - 1; i > 0; i--) {
+      var n = random.nextInt(i + 1);
+
+      var temp = items[i];
+      items[i] = items[n];
+      items[n] = temp;
+    }
+    return items;
   }
 }

@@ -32,7 +32,8 @@ class _TrailerMainState extends State<TrailerMain> {
     // ];
 
     if (mainViewModel.loading) {
-      return Container(height: 240, child: AppLoading());
+      return Container(
+          color: colorBackgroundDark, height: 240, child: AppLoading());
     } else if (mainViewModel.error) {
       return Text(
         mainViewModel.movieError.massage,

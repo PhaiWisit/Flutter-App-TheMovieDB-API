@@ -16,6 +16,11 @@ const String MOVIE_TRAILER =
         MOVIE_API_KEY +
         '&language=en-US&page=1';
 
+const String MOVIE_SEARCH =
+    'https://api.themoviedb.org/3/search/movie?api_key=' +
+        MOVIE_API_KEY +
+        '&language=en-US&page=1&include_adult=false&query=';
+
 const String VIEW_MOVIE_IMAGE = 'https://image.tmdb.org/t/p/w500/';
 const String VIEW_MOVIE_YOUTUBE = 'https://www.youtube.com/watch?v=';
 
