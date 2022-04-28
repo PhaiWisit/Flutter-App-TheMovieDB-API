@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+// import 'package:flutter_moviedb_api/models/movie_popular_model.dart';
 import 'package:flutter_moviedb_api/utils/constants.dart';
 import 'package:flutter_moviedb_api/view_models/main_view_model.dart';
 import 'package:flutter_moviedb_api/views/component/app_loading.dart';
 import 'package:flutter_moviedb_api/views/component/loading_widget.dart';
 import 'package:flutter_moviedb_api/views/component/swiper_pagination.dart';
+import 'package:flutter_moviedb_api/views/details/details_page.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+
+import '../../models/movie_trailer_model.dart';
 
 class TrailerMain extends StatefulWidget {
   const TrailerMain({Key? key}) : super(key: key);
@@ -34,7 +38,7 @@ class _TrailerMainState extends State<TrailerMain> {
     } else {
       return Container(
         height: 240,
-        color: colorBackgroundDark,
+        // color: colorBackgroundDark,
         child: Swiper(
           autoplay: true,
           autoplayDelay: 5000,
@@ -134,7 +138,17 @@ class _TrailerMainState extends State<TrailerMain> {
           color: Colors.transparent,
           child: InkWell(
             onTap: () {
-              //
+              mainViewModel.setSelectedModel(
+                  trailerModel: mainViewModel.trailerList[index]);
+              Result select = mainViewModel.selectedModel;
+              print(select.originalTitle);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => DetailPage(
+                          movieType: 'trailer',
+                        )),
+              );
             },
           ),
         ),

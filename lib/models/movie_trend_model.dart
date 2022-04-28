@@ -87,7 +87,7 @@ class Result {
 
   factory Result.fromJson(Map<String, dynamic> json) => Result(
         originalLanguage: originalLanguageValues.map[json["original_language"]],
-        originalTitle: json["original_title"] ?? 'null',
+        originalTitle: json["original_title"] ?? '',
         posterPath: json["poster_path"],
         title: json["title"] ?? 'null',
         video: json["video"] ?? false,
@@ -110,7 +110,7 @@ class Result {
         firstAirDate: json["first_air_date"] == null
             ? DateTime.now()
             : DateTime.parse(json["first_air_date"]),
-        originalName: json["original_name"] ?? 'null',
+        originalName: json["original_name"] ?? '',
       );
 
   Map<String, dynamic> toJson() => {

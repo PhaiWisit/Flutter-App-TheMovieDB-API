@@ -17,6 +17,7 @@ class MainViewModel extends ChangeNotifier {
   List<Trend.Result> _trendList = [];
   List<Trailer.Result> _trailerList = [];
   MovieError _movieError = MovieError(code: 0, massage: 'massage');
+  dynamic _selectedModel;
 
   bool get loading => _loading;
   bool get error => _error;
@@ -27,6 +28,7 @@ class MainViewModel extends ChangeNotifier {
   List<Trend.Result> get trendList => _trendList;
   List<Trailer.Result> get trailerList => _trailerList;
   MovieError get movieError => _movieError;
+  dynamic get selectedModel => _selectedModel;
 
   void main() async {
     await setLoading(true);
@@ -41,6 +43,22 @@ class MainViewModel extends ChangeNotifier {
     // getPopular();
     // getTrend();
     // getTrailer();
+  }
+
+  setSelectedModel({
+    Popular.Result? popularModel,
+    Trend.Result? trendModel,
+    Trailer.Result? trailerModel,
+  }) {
+    if (popularModel != null) {
+      _selectedModel = popularModel;
+    }
+    if (trendModel != null) {
+      _selectedModel = trendModel;
+    }
+    if (trailerModel != null) {
+      _selectedModel = trailerModel;
+    }
   }
 
   setLoading(bool loading) {

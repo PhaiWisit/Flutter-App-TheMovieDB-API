@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_moviedb_api/utils/web_demo_view.dart';
 import 'package:flutter_moviedb_api/view_models/main_view_model.dart';
 import 'package:flutter_moviedb_api/view_models/search_view_model.dart';
+import 'package:flutter_moviedb_api/views/details/details_page.dart';
 import 'package:flutter_moviedb_api/views/home_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -32,14 +33,17 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
           scrollBehavior: AppScrollBehavior(),
           debugShowCheckedModeBanner: false,
-          title: 'Flutter Demo',
+          title: 'Flutter TMDB Demo',
           theme: ThemeData(
             primarySwatch: Colors.blue,
           ),
           home: WebDemoView(
             child: HomeScreen(),
           )
-          // home: const HomeScreen(),
+          // home: const DetailPage(
+          //   id: 414906,
+          //   mediatype: 'movie',
+          // ),
           ),
     );
   }

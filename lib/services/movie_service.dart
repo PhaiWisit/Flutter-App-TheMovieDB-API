@@ -28,7 +28,7 @@ class MovieService {
     } on FormatException {
       return Failure(code: INVALID_FORMAT, errorResponse: 'Invalid Format');
     } catch (e) {
-      return Failure(code: UNKNOWN_ERROR, errorResponse: 'Unknown Error');
+      return Failure(code: UNKNOWN_ERROR, errorResponse: e);
     }
   }
 

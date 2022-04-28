@@ -43,6 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: colorBackgroundDark,
       drawer: _buildDrawer(),
       appBar: AppBar(
           actions: [
@@ -120,8 +121,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       radius: 40,
                       backgroundColor: Colors.grey,
-                      backgroundImage: NetworkImage(
-                          'https://scontent.fbkk9-2.fna.fbcdn.net/v/t39.30808-6/275304229_4720826941362583_9132103829284324688_n.jpg?_nc_cat=109&ccb=1-5&_nc_sid=09cbfe&_nc_eui2=AeHDvwrA-BRpPDzUSWhKhTWx7LXOdSTxxPnstc51JPHE-VhPDvifO2G3ipRGSqosQUdvzfvjaIcWfYXqmiQldP4a&_nc_ohc=n1xAyOFEDcgAX8J96cQ&_nc_ht=scontent.fbkk9-2.fna&oh=00_AT9Jy7TfXRgwo-eyPeFVipkG3XBETZd2YizWtqjqeHcq9g&oe=6268EB0F'),
+                      // backgroundImage: NetworkImage(
+                      //     'https://scontent.fbkk9-2.fna.fbcdn.net/v/t39.30808-6/275304229_4720826941362583_9132103829284324688_n.jpg?_nc_cat=109&ccb=1-5&_nc_sid=09cbfe&_nc_eui2=AeHDvwrA-BRpPDzUSWhKhTWx7LXOdSTxxPnstc51JPHE-VhPDvifO2G3ipRGSqosQUdvzfvjaIcWfYXqmiQldP4a&_nc_ohc=n1xAyOFEDcgAX8J96cQ&_nc_ht=scontent.fbkk9-2.fna&oh=00_AT9Jy7TfXRgwo-eyPeFVipkG3XBETZd2YizWtqjqeHcq9g&oe=6268EB0F'),
                     ),
                   ),
                   SizedBox(height: 5.0),

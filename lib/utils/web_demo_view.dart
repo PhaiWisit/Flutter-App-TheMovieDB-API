@@ -17,7 +17,7 @@ class WebDemoView extends StatelessWidget {
     return ListView(
       children: [
         SizedBox(
-          height: 100,
+          height: 50,
         ),
         Center(
           child: Text(
@@ -26,6 +26,9 @@ class WebDemoView extends StatelessWidget {
                 TextStyle(decoration: TextDecoration.none, color: Colors.black),
             textAlign: TextAlign.center,
           ),
+        ),
+        SizedBox(
+          height: 50,
         ),
         Center(
           child: Container(

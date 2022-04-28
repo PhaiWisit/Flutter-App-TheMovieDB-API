@@ -158,6 +158,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.0.0"
+  intl:
+    dependency: "direct main"
+    description:
+      name: intl
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.17.0"
   lints:
     dependency: transitive
     description:
@@ -394,6 +401,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.2"
+  web_smooth_scroll:
+    dependency: "direct main"
+    description:
+      name: web_smooth_scroll
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.3"
   win32:
     dependency: transitive
     description:

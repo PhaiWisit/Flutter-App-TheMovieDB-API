@@ -3,8 +3,11 @@ import 'package:flutter_moviedb_api/utils/constants.dart';
 import 'package:flutter_moviedb_api/view_models/main_view_model.dart';
 import 'package:flutter_moviedb_api/views/component/app_loading.dart';
 import 'package:flutter_moviedb_api/views/component/loading_widget.dart';
+import 'package:flutter_moviedb_api/views/details/details_page.dart';
 import 'package:provider/provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+
+import '../../models/movie_popular_model.dart';
 
 class PopularMain extends StatelessWidget {
   const PopularMain({Key? key}) : super(key: key);
@@ -16,7 +19,7 @@ class PopularMain extends StatelessWidget {
 
     return Container(
       height: 240,
-      color: colorBackgroundDark,
+      // color: colorBackgroundDark,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -55,7 +58,7 @@ class PopularMain extends StatelessWidget {
                       scrollDirection: Axis.horizontal,
                       itemCount: mainViewModel.popularList.length,
                       itemBuilder: ((context, index) {
-                        return _buileMovieCard(index, mainViewModel);
+                        return _buileMovieCard(context, index, mainViewModel);
                       })),
                 );
               }
@@ -66,7 +69,8 @@ class PopularMain extends StatelessWidget {
     );
   }
 
-  Widget _buileMovieCard(int index, MainViewModel mainViewModel) {
+  Widget _buileMovieCard(
+      BuildContext context, int index, MainViewModel mainViewModel) {
     return Padding(
       padding: const EdgeInsets.only(left: 8, top: 8, bottom: 8),
       child: SizedBox(
@@ -103,7 +107,17 @@ class PopularMain extends StatelessWidget {
               color: Colors.transparent,
               child: InkWell(
                 onTap: () {
-                  //
+                  mainViewModel.setSelectedModel(
+                      popularModel: mainViewModel.popularList[index]);
+                  Result select = mainViewModel.selectedModel;
+                  print(select.originalTitle);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => DetailPage(
+                              movieType: 'popular',
+                            )),
+                  );
                 },
               ),
             ),
