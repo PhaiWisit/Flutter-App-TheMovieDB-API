@@ -5,6 +5,7 @@ import 'package:flutter_moviedb_api/views/main/popular_widget.dart';
 import 'package:flutter_moviedb_api/views/main/trailer_widget.dart';
 import 'package:flutter_moviedb_api/views/main/trend_widget.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:web_smooth_scroll/web_smooth_scroll.dart';
 
 class MainPage extends StatelessWidget {
@@ -34,16 +35,16 @@ class MainPage extends StatelessWidget {
                     TrailerMain(),
                     PopularMain(),
                     TrendMain(),
-                    Container(
-                      height: 240,
-                      color: colorBackgroundDark,
-                      child: Text(''),
-                    ),
-                    Container(
-                      height: 240,
-                      color: colorBackgroundDark,
-                      child: Text(''),
-                    ),
+                    // Container(
+                    //   height: 240,
+                    //   color: colorBackgroundDark,
+                    //   child: Text(''),
+                    // ),
+                    // Container(
+                    //   height: 240,
+                    //   color: colorBackgroundDark,
+                    //   child: Text(''),
+                    // ),
                     // PopularMain(),
                     // PopularMain(),
                     // PopularMain(),

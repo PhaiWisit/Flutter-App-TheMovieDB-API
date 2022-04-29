@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_moviedb_api/utils/constants.dart';
+import 'package:flutter_moviedb_api/view_models/detail_view_model.dart';
 import 'package:flutter_moviedb_api/view_models/main_view_model.dart';
 import 'package:flutter_moviedb_api/views/component/app_loading.dart';
 import 'package:flutter_moviedb_api/views/component/loading_widget.dart';
@@ -15,6 +16,7 @@ class TrendMain extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     MainViewModel mainViewModel = context.watch<MainViewModel>();
+    DetailViewModel detailViewModel = context.watch<DetailViewModel>();
     TextStyle textStyleWhite = TextStyle(color: Colors.white);
     return Container(
       height: 240,
@@ -57,7 +59,8 @@ class TrendMain extends StatelessWidget {
                       scrollDirection: Axis.horizontal,
                       itemCount: mainViewModel.trendList.length,
                       itemBuilder: ((context, index) {
-                        return _buileMovieCard(context, index, mainViewModel);
+                        return _buileMovieCard(
+                            context, index, mainViewModel, detailViewModel);
                       })),
                 );
               }
@@ -68,8 +71,8 @@ class TrendMain extends StatelessWidget {
     );
   }
 
-  Widget _buileMovieCard(
-      BuildContext context, int index, MainViewModel mainViewModel) {
+  Widget _buileMovieCard(BuildContext context, int index,
+      MainViewModel mainViewModel, DetailViewModel detailViewModel) {
     return Padding(
       padding: const EdgeInsets.only(left: 8, top: 8, bottom: 8),
       child: SizedBox(
@@ -109,7 +112,9 @@ class TrendMain extends StatelessWidget {
                   mainViewModel.setSelectedModel(
                       trendModel: mainViewModel.trendList[index]);
                   Result select = mainViewModel.selectedModel;
-                  print(select.originalTitle);
+                  detailViewModel.getMovieVideo(
+                      select.id, select.mediaType.toString());
+                  print(select.mediaType.toString());
                   Navigator.push(
                     context,
                     MaterialPageRoute(
