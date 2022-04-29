@@ -55,6 +55,9 @@ class _VideoWidgetState extends State<VideoWidget> {
 
     if (video_key.length == 1) {
       video_keyIsOne = true;
+    } else if (video_key.length == 0) {
+      video_keyIsOne = true;
+      video_key.add('null');
     }
 
     _controller = YoutubePlayerController(

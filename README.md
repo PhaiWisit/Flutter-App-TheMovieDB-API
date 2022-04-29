@@ -7,21 +7,14 @@
 
 ### Page
 
-:white_check_mark: : Finish<br/>
+<!-- :white_check_mark: : Finish<br/>
 :parking: : Inprogress<br/>
 :soon: : Plan<br/>
-:x: : Abandon<br/>
+:x: : Abandon<br/> -->
 
 - :white_check_mark: MainPage
 - :white_check_mark: SearchPage
-- :parking: DetailPage
-- :soon: VideoViewPage
-- :x: MoviePage
-- :x: SeriesPage
-- :soon: FavoritePage
-- :x: ProfilePage
-- :soon: SettingPage
-- :x: AboutPage
+- :white_check_mark: DetailPage
 
 ### Screenshort
 <br/>
@@ -32,3 +25,6 @@
 
 - SearchPage <br/>
 <img src="screenshots/flutter_02.png" width="350">
+
+- DetailPage <br/>
+<img src="screenshots/flutter_03.png" width="350">
