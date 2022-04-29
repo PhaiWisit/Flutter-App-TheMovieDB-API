@@ -33,6 +33,7 @@ migrate_working_dir/
 
 /lib/utils/api_key.dart
 /build/
+/build/web/
 
 
 
