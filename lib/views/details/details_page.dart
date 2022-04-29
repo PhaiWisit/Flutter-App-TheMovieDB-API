@@ -41,7 +41,18 @@ class _DetailPageState extends State<DetailPage> {
   Widget build(BuildContext context) {
     MainViewModel mainViewModel = context.watch<MainViewModel>();
     DetailViewModel detailViewModel = context.watch<DetailViewModel>();
-
+    List<String> video_key = [];
+    if (!detailViewModel.loading) {
+      if (detailViewModel.movieVideoModel.results.length > 2) {
+        video_key.add(detailViewModel.movieVideoModel.results[0].key);
+        video_key.add(detailViewModel.movieVideoModel.results[1].key);
+        video_key.add(detailViewModel.movieVideoModel.results[2].key);
+      } else if (detailViewModel.movieVideoModel.results.length == 1) {
+        video_key.add(detailViewModel.movieVideoModel.results[0].key);
+      } else {
+        video_key = [];
+      }
+    }
     // detailViewModel.getMovieVideo(mainViewModel.selectedModel.id);
 
     // detailViewModel.setMovieId(634649);
@@ -69,32 +80,28 @@ class _DetailPageState extends State<DetailPage> {
             ),
           ),
           body: Container(
-              child: RefreshIndicator(
-            onRefresh: () async {},
-            child: ListView(
-              children: [
-                detailViewModel.loading
-                    ? Container(
-                        height: 220,
-                        child: AppLoading(),
-                      )
-                    : VideoWidget(
-                        video_key:
-                            detailViewModel.movieVideoModel.results[0].key,
-                      ),
-                DetailWidget(
-                  movieType: widget.movieType,
-                ),
-                Container(
-                  height: 240,
-                  // color: Colors.amber.shade300,
-                  child: Text(''),
-                ),
-                // PopularMain(),
-                // PopularMain(),
-                // PopularMain(),
-              ],
-            ),
+              child: ListView(
+            children: [
+              detailViewModel.loading
+                  ? Container(
+                      height: 220,
+                      child: AppLoading(),
+                    )
+                  : VideoWidget(
+                      video_key: video_key,
+                    ),
+              DetailWidget(
+                movieType: widget.movieType,
+              ),
+              Container(
+                height: 240,
+                // color: Colors.amber.shade300,
+                child: Text(''),
+              ),
+              // PopularMain(),
+              // PopularMain(),
+              // PopularMain(),
+            ],
           )),
         ),
       ),
