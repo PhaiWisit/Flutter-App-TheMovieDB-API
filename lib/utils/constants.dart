@@ -21,6 +21,16 @@ const String MOVIE_SEARCH =
         MOVIE_API_KEY +
         '&language=en-US&page=1&include_adult=false&query=';
 
+const String MOVIE_VIDEO_1 = 'https://api.themoviedb.org/3/movie/';
+
+const String MOVIE_VIDEO_2 =
+    '/videos?api_key=' + MOVIE_API_KEY + '&language=en-US';
+
+const String TV_VIDEO_1 = 'https://api.themoviedb.org/3/tv/';
+
+const String TV_VIDEO_2 =
+    '/videos?api_key=' + MOVIE_API_KEY + '&language=en-US';
+
 const String VIEW_MOVIE_IMAGE = 'https://image.tmdb.org/t/p/w500/';
 const String VIEW_MOVIE_YOUTUBE = 'https://www.youtube.com/watch?v=';
 

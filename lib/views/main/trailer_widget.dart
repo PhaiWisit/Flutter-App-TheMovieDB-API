@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 // import 'package:flutter_moviedb_api/models/movie_popular_model.dart';
 import 'package:flutter_moviedb_api/utils/constants.dart';
+import 'package:flutter_moviedb_api/view_models/detail_view_model.dart';
 import 'package:flutter_moviedb_api/view_models/main_view_model.dart';
 import 'package:flutter_moviedb_api/views/component/app_loading.dart';
 import 'package:flutter_moviedb_api/views/component/loading_widget.dart';
@@ -26,6 +27,7 @@ class _TrailerMainState extends State<TrailerMain> {
   @override
   Widget build(BuildContext context) {
     MainViewModel mainViewModel = context.watch<MainViewModel>();
+    DetailViewModel detailViewModel = context.watch<DetailViewModel>();
     TextStyle textStyleWhite = TextStyle(color: Colors.white);
     if (mainViewModel.loading) {
       return Container(
@@ -57,7 +59,7 @@ class _TrailerMainState extends State<TrailerMain> {
           itemBuilder: (context, index) {
             return Padding(
                 padding: EdgeInsets.all(8),
-                child: _buildSlideShow(index, mainViewModel));
+                child: _buildSlideShow(index, mainViewModel, detailViewModel));
           },
           pagination: SwiperPagination(
             builder: CustomPaginationBuilder(
@@ -71,7 +73,8 @@ class _TrailerMainState extends State<TrailerMain> {
     }
   }
 
-  Widget _buildSlideShow(int index, MainViewModel mainViewModel) {
+  Widget _buildSlideShow(
+      int index, MainViewModel mainViewModel, DetailViewModel detailViewModel) {
     return Stack(children: <Widget>[
       Container(
         decoration: BoxDecoration(
@@ -141,6 +144,7 @@ class _TrailerMainState extends State<TrailerMain> {
               mainViewModel.setSelectedModel(
                   trailerModel: mainViewModel.trailerList[index]);
               Result select = mainViewModel.selectedModel;
+              detailViewModel.getMovieVideo(select.id, 'MediaType.MOVIE');
               print(select.originalTitle);
               Navigator.push(
                 context,

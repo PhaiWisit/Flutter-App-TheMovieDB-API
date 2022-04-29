@@ -41,6 +41,8 @@ dependencies:
   responsive_builder: ^0.4.2
   web_smooth_scroll: ^0.0.3
   intl: ^0.17.0
+  youtube_player_flutter: ^8.0.0
+  shared_preferences: ^2.0.13
 
 dev_dependencies:
   flutter_test:

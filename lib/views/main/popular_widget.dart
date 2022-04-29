@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_moviedb_api/utils/constants.dart';
+import 'package:flutter_moviedb_api/view_models/detail_view_model.dart';
 import 'package:flutter_moviedb_api/view_models/main_view_model.dart';
 import 'package:flutter_moviedb_api/views/component/app_loading.dart';
 import 'package:flutter_moviedb_api/views/component/loading_widget.dart';
@@ -15,6 +16,7 @@ class PopularMain extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     MainViewModel mainViewModel = context.watch<MainViewModel>();
+    DetailViewModel detailViewModel = context.watch<DetailViewModel>();
     TextStyle textStyleWhite = TextStyle(color: Colors.white);
 
     return Container(
@@ -58,7 +60,8 @@ class PopularMain extends StatelessWidget {
                       scrollDirection: Axis.horizontal,
                       itemCount: mainViewModel.popularList.length,
                       itemBuilder: ((context, index) {
-                        return _buileMovieCard(context, index, mainViewModel);
+                        return _buileMovieCard(
+                            context, index, mainViewModel, detailViewModel);
                       })),
                 );
               }
@@ -69,8 +72,8 @@ class PopularMain extends StatelessWidget {
     );
   }
 
-  Widget _buileMovieCard(
-      BuildContext context, int index, MainViewModel mainViewModel) {
+  Widget _buileMovieCard(BuildContext context, int index,
+      MainViewModel mainViewModel, DetailViewModel detailViewModel) {
     return Padding(
       padding: const EdgeInsets.only(left: 8, top: 8, bottom: 8),
       child: SizedBox(
@@ -110,6 +113,7 @@ class PopularMain extends StatelessWidget {
                   mainViewModel.setSelectedModel(
                       popularModel: mainViewModel.popularList[index]);
                   Result select = mainViewModel.selectedModel;
+                  detailViewModel.getMovieVideo(select.id, 'MediaType.MOVIE');
                   print(select.originalTitle);
                   Navigator.push(
                     context,

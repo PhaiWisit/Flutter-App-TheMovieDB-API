@@ -1,47 +1,94 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_moviedb_api/models/movie_video_model.dart';
 import 'package:flutter_moviedb_api/utils/constants.dart';
+import 'package:flutter_moviedb_api/utils/web_demo_view.dart';
+import 'package:flutter_moviedb_api/view_models/detail_view_model.dart';
 import 'package:flutter_moviedb_api/view_models/main_view_model.dart';
+import 'package:flutter_moviedb_api/views/component/app_loading.dart';
 import 'package:flutter_moviedb_api/views/details/detail_widget.dart';
+import 'package:flutter_moviedb_api/views/details/video_widget.dart';
 import 'package:provider/provider.dart';
 
-class DetailPage extends StatelessWidget {
-  const DetailPage({Key? key, required this.movieType}) : super(key: key);
+class DetailPage extends StatefulWidget {
+  const DetailPage({
+    Key? key,
+    required this.movieType,
+  }) : super(key: key);
 
   final String movieType;
+  // final dynamic selectModel;
+
+  @override
+  State<DetailPage> createState() => _DetailPageState();
+}
+
+class _DetailPageState extends State<DetailPage> {
+  // late DetailViewModel detailViewModel;
+
+  @override
+  void initState() {
+    super.initState();
+    // MainViewModel mainViewModel = context.watch<MainViewModel>();
+
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+
+    //   Provider.of<DetailViewModel>(context, listen: false)
+    //       .getMovieVideo(widget.selectModel.id);
+    // });
+  }
 
   @override
   Widget build(BuildContext context) {
     MainViewModel mainViewModel = context.watch<MainViewModel>();
+    DetailViewModel detailViewModel = context.watch<DetailViewModel>();
+
+    // detailViewModel.getMovieVideo(mainViewModel.selectedModel.id);
+
+    // detailViewModel.setMovieId(634649);
+
+    // detailViewModel.getMovieVideo(634649);
+    // DetailViewModel detailViewModel =
+    //     Provider.of<DetailViewModel>(context, listen: false)
+    //         .getMovieVideo(634649);
+
     var textWhite = TextStyle(color: Colors.white);
-    return Scaffold(
-      backgroundColor: colorBackgroundDark,
-      appBar: AppBar(
-        backgroundColor: colorBackgroundDark,
-        title: Text(
-          mainViewModel.selectedModel.originalTitle,
-          style: textWhite,
-        ),
-      ),
-      body: Container(
-          color: Colors.white,
-          child: RefreshIndicator(
-            onRefresh: () async {
-              // mainViewModel.main();
-            },
+
+    return WebDemoView(
+      child: WillPopScope(
+        onWillPop: () {
+          Navigator.pop(context, false);
+          return Future.value(false);
+        },
+        child: Scaffold(
+          backgroundColor: colorBackgroundDark,
+          appBar: AppBar(
+            backgroundColor: colorBackgroundDark,
+            title: Text(
+              mainViewModel.selectedModel.originalTitle,
+              style: textWhite,
+            ),
+          ),
+          body: Container(
+              child: RefreshIndicator(
+            onRefresh: () async {},
             child: ListView(
               children: [
-                Container(
-                  height: 220,
-                  color: Colors.amber.shade100,
-                  child: Text('Video section'),
-                ),
+                detailViewModel.loading
+                    ? Container(
+                        height: 220,
+                        child: AppLoading(),
+                      )
+                    : VideoWidget(
+                        video_key:
+                            detailViewModel.movieVideoModel.results[0].key,
+                      ),
                 DetailWidget(
-                  movieType: movieType,
+                  movieType: widget.movieType,
                 ),
                 Container(
                   height: 240,
-                  color: Colors.amber.shade300,
-                  child: Text('What is section?'),
+                  // color: Colors.amber.shade300,
+                  child: Text(''),
                 ),
                 // PopularMain(),
                 // PopularMain(),
@@ -49,6 +96,8 @@ class DetailPage extends StatelessWidget {
               ],
             ),
           )),
+        ),
+      ),
     );
   }
 }

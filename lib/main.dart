@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_moviedb_api/utils/web_demo_view.dart';
+import 'package:flutter_moviedb_api/view_models/detail_view_model.dart';
 import 'package:flutter_moviedb_api/view_models/main_view_model.dart';
 import 'package:flutter_moviedb_api/view_models/search_view_model.dart';
 import 'package:flutter_moviedb_api/views/details/details_page.dart';
@@ -28,7 +29,8 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => MainViewModel()),
-        ChangeNotifierProvider(create: (_) => SearchViewModel())
+        ChangeNotifierProvider(create: (_) => SearchViewModel()),
+        ChangeNotifierProvider(create: (_) => DetailViewModel())
       ],
       child: MaterialApp(
           scrollBehavior: AppScrollBehavior(),
